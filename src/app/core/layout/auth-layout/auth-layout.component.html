@@ -1,0 +1,27 @@
+<div class="auth_layout grid ">
+    <div class="col-12  md:col-6 side_left">
+        <div>
+            <span>Welcome to</span>
+            <h2>Elevate</h2>
+            <p>Quidem autem voluptatibus qui quaerat aspernatur architecto natus</p>
+        </div>
+        <div>
+            <img src="./assets/images/bro.svg" width="100%" alt="">
+        </div>
+    </div>
+    <div class="col-12 md:col-6 ">
+        <div class="auth_menu">
+            <ul class="">
+                <li>
+                    English
+                    <img src="../../../../assets/icons/arrow-down.svg" alt="">
+                </li>
+                <li routerLink="login" class="text-main-color font-bold">Sign in</li>
+                <li routerLink="register" class="text-main-color register">Register</li>
+            </ul>
+        </div>
+        <div class="auth_router_outlet ">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

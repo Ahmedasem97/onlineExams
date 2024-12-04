@@ -1,0 +1,71 @@
+.auth_layout {
+    min-height: 100vh;
+}
+
+.side_left {
+    background-color: #F0F4FC;
+    box-shadow: 0px 5px 100px 0px #0000001A;
+    border-radius: 0px 100px 100px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.side_left span {
+    font-family: Poppins;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 75px;
+    text-align: left;
+}
+
+.side_left h2 {
+    font-family: Poppins;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 90px;
+    text-align: left;
+    margin: 0;
+    color: #122D9C;
+}
+
+.side_left p {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: left;
+    margin: 0;    
+}
+
+
+
+.auth_menu {
+    // height: 20%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    // padding-right: 15%;
+    padding: 70px 15% 50px 0;
+}
+
+li:hover {
+    background-color: unset;
+}
+
+.register {
+    border: 1px solid #E0E0E9;
+    border-radius: 15px;
+
+}
+
+@media screen and (max-width: 767px) {
+    .side_left {
+        display: none;
+    }
+    .auth_menu {
+        padding-right: 10px;
+    }
+}

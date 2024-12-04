@@ -1,0 +1,18 @@
+@if (apiResponeErr) {
+    <div class="card">
+        <p-messages severity="error">
+            <ng-template pTemplate>
+                <div>{{apiResponeErr}}</div>
+            </ng-template>
+        </p-messages>
+    </div>
+}
+@if (apiResponeSuccsse) {
+    <div class="card">
+        <p-messages severity="success">
+            <ng-template pTemplate>
+                <div>{{apiResponeSuccsse}}</div>
+            </ng-template>
+        </p-messages>
+    </div>
+}

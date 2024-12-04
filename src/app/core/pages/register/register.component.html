@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="inner">
+        <h1>Sign up</h1>
+        <form [formGroup]="registerForm" (ngSubmit)="registerSumbit()">
+            <div class="gap-5 flex flex-column">
+                <div class="card">
+                    <input pInputText formControlName="username" type="text" class="w-full " placeholder="Username" />
+
+                    <app-error-message
+                        [errorText]="[{text:'User Name is required', error:'required'}, {text:'Enter a letter and number only and no spaces', error:'pattern'}, {text:'min length is 4', error:'minlength'}, {text:'max length is 20', error:'maxlength'}]"
+                        [formGroupErr]="registerForm" [formControlErr]="'username'"></app-error-message>
+                </div>
+                <div class="card">
+                    <input pInputText formControlName="firstName" type="text" class="w-full "
+                        placeholder="First Name" />
+
+                    <app-error-message
+                        [errorText]="[{text:'First Name is required', error:'required'} ,{text:'Enter letters only' , error:'pattern'} ]"
+                        [formGroupErr]="registerForm" [formControlErr]="'firstName'"></app-error-message>
+                </div>
+                <div class="card">
+                    <input pInputText formControlName="lastName" type="text" class="w-full " placeholder="Last Name" />
+
+                    <app-error-message
+                        [errorText]="[{text:'Last Name is required', error:'required'}, {text:'Enter letters only' , error:'pattern'}]"
+                        [formGroupErr]="registerForm" [formControlErr]="'lastName'"></app-error-message>
+                </div>
+                <div class="card">
+                    <input pInputText formControlName="email" type="email" class="w-full " placeholder="Email" />
+
+                    <app-error-message
+                        [errorText]="[{text:'Email is required', error:'required'}, {text:'Enter Valid Email' , error:'email'}]"
+                        [formGroupErr]="registerForm" [formControlErr]="'email'"></app-error-message>
+                </div>
+                <div class="card">
+                    <p-password formControlName="password" placeholder="Password" [toggleMask]="true"
+                        [feedback]="false" />
+
+                    <app-error-message
+                        [errorText]="[{text:'Password is required', error:'required'}, {text:'At least one uppercase letter.' , error:'pattern'},{text:'At least one lowercase letter.' , error:'pattern'},{text:'At least one number.' , error:'pattern'},{text:'At least one special character.' , error:'pattern'},{text:'The text must be at least 8 characters long.' , error:'pattern'}] "
+                        [formGroupErr]="registerForm" [formControlErr]="'password'"></app-error-message>
+                </div>
+                <div class="card">
+                    <p-password formControlName="rePassword" placeholder="Confirm Password" [toggleMask]="true"
+                        [feedback]="false" />
+
+                        <app-error-message
+                        [errorText]="[{text:'rePassword is required', error:'required'}]"
+                        [formGroupErr]="registerForm" [formControlErr]="'rePassword'"></app-error-message>
+
+                    @if (registerForm.getError('mismatch') && registerForm.get('rePassword')?.touched ) {
+                    <p-messages severity="error">
+                        <ng-template pTemplate>
+                            <div>Password is not matching</div>
+                        </ng-template>
+                    </p-messages>
+                    }
+                </div>
+                <div class="card">
+                    <input pInputText formControlName="phone" type="tel" class="w-full " placeholder="phone number" />
+
+                    <app-error-message
+                        [errorText]="[{text:'phone is required', error:'required'}, {text:'Enter egyption phone number', error:'pattern'}]"
+                        [formGroupErr]="registerForm" [formControlErr]="'phone'"></app-error-message>
+                    <div class="text-center pt-3">
+                        <app-api-response-error [apiResponeErr]="errMessage"></app-api-response-error>
+                        <span>Already have an account? <a routerLink="/auth/login"
+                                class="cursor-pointer">Login</a></span>
+                    </div>
+                </div>
+                <!-- <button pButton pRipple class="block bg-main-color btn">Sign in</button> -->
+                <app-button [class.disabled]="isDisabled" [text]="'Create Account'" [classes]="'w-full'"></app-button>
+                
+            </div>
+        </form>
+    </div>
+</div>

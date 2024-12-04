@@ -1,0 +1,16 @@
+<div class="card">
+    @if (formGroupErr.get(formControlErr)?.errors && formGroupErr.get(formControlErr)?.touched   ) {
+        @for (message of errorText; track $index) {
+            @if (formGroupErr.get(formControlErr)?.getError(message.error)) {
+                <p-messages severity="error">
+                    <ng-template pTemplate>
+                        <div >{{message.text}}</div>
+                    </ng-template>
+                </p-messages>
+            }
+        }
+    }
+</div>
+
+
+<!-- <p class="m-0 bg-red-500 p-1 border-round text-white">error-message works!</p> -->

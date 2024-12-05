@@ -1,8 +1,0 @@
-{
-  "routes": [
-    "/auth",
-    "/auth/forgetPassword",
-    "/auth/login",
-    "/auth/register"
-  ]
-}

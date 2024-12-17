@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{aa as o,fb as n,gb as i,vb as r,zb as s}from"./chunk-ZP62FUPS.mjs";import"./chunk-VVCT4QZE.mjs";var u=(()=>{class t{static{this.\u0275fac=function(e){return new(e||t)}}static{this.\u0275cmp=o({type:t,selectors:[["app-quiz-history"]],standalone:!0,features:[s],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),r(1,"quiz-history works!"),i())}})}}return t})();export{u as QuizHistoryComponent};

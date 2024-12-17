@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 export class ButtonComponent {
   @Input() text!:string;
   @Input() classes:string = 'w-full'
+  @Input() divClasses!:string
   
 
 }

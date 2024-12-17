@@ -1,0 +1,27 @@
+<div class="diploma flex justify-content-between">
+
+    @for (exam of DiplomaRes ; track $index) {
+    <div class="flex align-items-center gap-3">
+        <figure class="placeholder-container">
+            @if (!imageLoaded) {
+            <div class="custom-placeholder"></div>
+            }
+            <img [src]="" (load)="imageLoaded = true" [class.hidden]="!imageLoaded" alt="Product Image" />
+        </figure>
+        <div>
+            <h3 class="m-0">{{exam.title}}</h3>
+            <span>
+                {{exam.numberOfQuestions}} Quistion
+            </span>
+        </div>
+    </div>
+    <div class="text-center">
+        <span>{{exam.duration}} minutes</span>
+        <app-button [text]="'Start'" [divClasses]="'mt-1'" [classes]="'w-fit pt-1 pb-1 '"></app-button>
+    </div>
+    }
+
+    @empty {
+    <div>There are no exams in this section at the moment.</div>
+    }
+</div>

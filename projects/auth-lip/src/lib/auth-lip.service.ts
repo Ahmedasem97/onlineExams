@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { ApiEndpoint } from './enums/Auth.endpoint';
 import { AuthAPIAdapter } from './adapter/auth_api.adapter';
 import { LoginUserData } from './interfaces/login-user-data';
-import { LoginApiResponse, LoginResponse } from './interfaces/loginResponse';
+import { LoginResponse } from './interfaces/loginResponse';
 import { RegisterUserData } from './interfaces/register-user-data';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,17 @@ export class AuthLipService implements AuthApi {
     return this._httpClient.put(ApiEndpoint.RESET_PASSWORD , data)
   }
 
+  logOut(): Observable<any> {
+      return this._httpClient.get(ApiEndpoint.LOG_OUT)
+  }
 
+  userData:any = null
+
+  userToken (){
+    if (localStorage.getItem("token") !== null) {
+      this.userData = jwtDecode(localStorage.getItem("token") !)
+    }
+  }
 
 
 

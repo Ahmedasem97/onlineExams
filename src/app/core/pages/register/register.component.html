@@ -1,4 +1,4 @@
-<div class="container">
+<div class="register">
     <div class="inner">
         <h1>Sign up</h1>
         <form [formGroup]="registerForm" (ngSubmit)="registerSumbit()">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <!-- <button pButton pRipple class="block bg-main-color btn">Sign in</button> -->
-                <app-button [class.disabled]="isDisabled" [text]="'Create Account'" [classes]="'w-full'"></app-button>
+                <app-button [class.disabled]="isDisabled" [text]="'Create Account'" [classes]="'w-full'" [divClasses]="'pb-4'"></app-button>
                 
             </div>
         </form>

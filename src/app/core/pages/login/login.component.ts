@@ -3,7 +3,7 @@ import { PasswordModule } from 'primeng/password';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthLipService } from 'auth-lip';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import { ErrorMessageComponent } from "../error-message/error-message.component";
 import { ApiResponseErrorComponent } from "../api-response-error/api-response-error.component";
@@ -19,6 +19,7 @@ export class LoginComponent {
 
   constructor(
     private _AuthLipService: AuthLipService,
+    private _Router:Router
   ) { }
 
 
@@ -37,6 +38,9 @@ export class LoginComponent {
       this.isDisabled = true
       this._AuthLipService.login(this.loginForm.value).subscribe({
         next: (res) => {
+          localStorage.setItem("token", res.token)
+          this._AuthLipService.userToken()
+          this._Router.navigate(["/exams"])
           this.isDisabled = false
           this.errMessage = ''
           console.log(res);

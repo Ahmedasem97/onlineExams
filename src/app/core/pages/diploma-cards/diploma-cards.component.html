@@ -1,6 +1,6 @@
 <div class="diploma flex justify-content-between">
 
-    @for (exam of DiplomaRes ; track $index) {
+    @for (exam of diplomaRes ; track $index) {
     <div class="flex align-items-center gap-3">
         <figure class="placeholder-container">
             @if (!imageLoaded) {
@@ -17,11 +17,15 @@
     </div>
     <div class="text-center">
         <span>{{exam.duration}} minutes</span>
-        <app-button [text]="'Start'" [divClasses]="'mt-1'" [classes]="'w-fit pt-1 pb-1 '"></app-button>
+        <app-button (click)="startQuiz(exam._id)" [text]="'Start'" [divClasses]="'mt-1'" [classes]="'w-fit pt-1 pb-1 '"></app-button>
     </div>
     }
 
     @empty {
     <div>There are no exams in this section at the moment.</div>
     }
+
 </div>
+@if (modal) {
+    <app-modal [examId]="selectedExamId"></app-modal>
+}

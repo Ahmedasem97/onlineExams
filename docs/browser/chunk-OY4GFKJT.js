@@ -1,1 +1,0 @@
-import{Ab as s,da as o,gb as n,hb as i,wb as r}from"./chunk-XTK4EG3W.js";var u=(()=>{class t{static{this.\u0275fac=function(e){return new(e||t)}}static{this.\u0275cmp=o({type:t,selectors:[["app-quiz-history"]],standalone:!0,features:[s],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),r(1,"quiz-history works!"),i())}})}}return t})();export{u as QuizHistoryComponent};

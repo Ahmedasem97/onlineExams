@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AllobjectSubjects, AllResSubjects, AllSingleSubject, ResSubjects, SingleSubject } from '../interfaces/subjects';
+import { AllExamsRes, ResExams } from '../interfaces/exams';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ExamsAdapter {
         limit: data.metadata.limit
       },
 
-      subjects: data.subjects.map((res:AllobjectSubjects) => ({
+      subjects: data.subjects.map((res: AllobjectSubjects) => ({
         _id: res._id,
         name: res.name,
         icon: res.icon
@@ -25,7 +26,7 @@ export class ExamsAdapter {
   }
 
 
-  singleSubjectAdapt (data:AllSingleSubject):SingleSubject{
+  singleSubjectAdapt(data: AllSingleSubject): SingleSubject {
     return {
       category: {
         _id: data.category._id,
@@ -35,4 +36,20 @@ export class ExamsAdapter {
     }
   }
 
+
+  getExamOnSubject(data: AllExamsRes): ResExams {
+    return {
+      exams: data.exams.map((res) => ({
+        _id: res._id,
+        active: res.active,
+        duration: res.duration,
+        numberOfQuestions: res.numberOfQuestions,
+        subject: res.subject,
+        title: res.title,
+        createdAt: res.createdAt
+      }))
+    }
+    
+
+  }
 }

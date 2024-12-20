@@ -1,0 +1,56 @@
+<div class="modal__parent">
+    <div class="diploma__modal">
+        @if (section1) {
+        <div class="section1">
+            <p>Instructions</p>
+            <ul class="block list-disc mb-3">
+                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                <li>Lorem ipsum dolor sit amet consectetur.</li>
+            </ul>
+            <app-button [text]="'Start'" (click)="startSection2()"></app-button>
+        </div>
+        }
+        @if (section2) {
+        <div class="section2">
+            <div class="flex justify-content-between align-items-center">
+                <span class="question_number">Question {{indexOfArray + 1}} of {{questionArray.length}}</span>
+                <span class="timer flex align-items-center" 
+                [style.color]="minutes < 2 ? '#CE2711' : ''">
+                    <img src="./assets/images/image 2.png" alt="">
+                    {{ minutes }}:{{ seconds }}
+                </span>
+            </div>
+            <div class="balls pt-4 pb-3 flex justify-content-between">
+                @for (item of questionArray; track $index) {
+                <span #balls [style.background-color]="$index == 0 ? 'var(--main-color)': '' "></span>
+                }
+            </div>
+            @for (question of questionArray ; track $index) {
+            <div [class.hidden]="$index !== indexOfArray ">
+                <p>{{question.question}}</p>
+                <ul>
+                    @for (li of question.answers; track $index) {
+                    <li>
+                        <input type="radio" [id]="li.answer" [name]="question.question">
+                        <label [for]="li.answer">{{li.answer}}</label>
+                    </li>
+                    }
+                </ul>
+            </div>
+            
+            }
+        </div>
+        <div class="flex gap-6 mt-4">
+            <app-button class="btn__back w-full" [text]="'Back'" (click)="backBtn()"></app-button>
+            <app-button class="btn__next w-full" [text]="'Next'" (click)="nextBtn()"></app-button>
+        </div>
+        }
+        @if (section3) {
+            <div class="section3">
+                <h1>exam is done</h1>
+            </div>
+        }
+    </div>
+</div>

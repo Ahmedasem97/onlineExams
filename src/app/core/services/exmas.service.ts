@@ -1,19 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SubjectEndPoint } from '../api-end-point/subjects-end-point';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { ResExams } from '../interfaces/exams';
+import { ExamsAdapter } from '../adapters/Exams-adapter';
+import { ExamsAbstract } from '../abstracts/subject-abstract/exams-abstract';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExmasService {
+export class ExmasService implements ExamsAbstract{
 
   constructor(
-    private _HttpClient: HttpClient
+    private _HttpClient: HttpClient,
+    private _ExamsAdapter:ExamsAdapter
   ) { }
 
-  getAllExamsOnSubject(id: string): Observable<any> {
-    return this._HttpClient.get(SubjectEndPoint.allExamsOnSubject + id)
+  getAllExamsOnSubject(id: string): Observable<ResExams> {
+    return this._HttpClient.get(SubjectEndPoint.allExamsOnSubject + id).pipe(
+      map((res:any)=> this._ExamsAdapter.getExamOnSubject(res))
+    )
   }
 
 

@@ -20,4 +20,10 @@ export interface Metadata {
     limit: number
 }
 
+export interface ResExams {
+    exams: Exams[]
+}
+
+
+
 

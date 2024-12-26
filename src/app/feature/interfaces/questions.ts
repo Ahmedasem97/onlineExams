@@ -45,3 +45,10 @@ export interface Exam {
     active: boolean
     createdAt: string
 }
+
+export interface wrongAnswer {
+    answer:string,
+    correctAnswer:string,
+    fullQuestion: Question
+    // {'answer':answer, 'correctAnswer':correctAnswer , 'fullQuestion': this.questionArray[this.indexOfArray]}
+}

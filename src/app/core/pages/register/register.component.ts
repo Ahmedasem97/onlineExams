@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import { PasswordModule } from 'primeng/password';
@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ApiResponseErrorComponent } from "../api-response-error/api-response-error.component";
 import { ToastModule } from 'primeng/toast';
 import { ToasterNgService } from '../../../shared/services/toaster-ng.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,12 +20,12 @@ import { ToasterNgService } from '../../../shared/services/toaster-ng.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
 
   constructor(
     private _AuthLipService: AuthLipService,
     private _Router: Router,
-    private _ToasterNgService:ToasterNgService
+    private _ToasterNgService: ToasterNgService
   ) { }
 
 
@@ -49,11 +50,12 @@ export class RegisterComponent {
   isDisabled: boolean = false
   errMessage!: string
 
+  registerApiDestroy!: Subscription
 
   registerSumbit(): void {
     if (this.registerForm.valid) {
       this.isDisabled = true
-      this._AuthLipService.register(this.registerForm.value).subscribe({
+      this.registerApiDestroy = this._AuthLipService.register(this.registerForm.value).subscribe({
         next: res => {
           this._ToasterNgService.toasterSecsses(res.message)
           this.isDisabled = false
@@ -70,9 +72,10 @@ export class RegisterComponent {
       this.registerForm.markAllAsTouched()
     }
 
-
-
   }
 
+  ngOnDestroy(): void {
+    this.registerApiDestroy.unsubscribe()
+  }
 
 }

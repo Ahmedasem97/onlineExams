@@ -17,7 +17,7 @@
     </div>
     <div class="text-center">
         <span>{{exam.duration}} minutes</span>
-        <app-button (click)="startQuiz(exam._id)" [text]="'Start'" [divClasses]="'mt-1'" [classes]="'w-fit pt-1 pb-1 '"></app-button>
+        <app-button (click)="startQuiz(exam._id , exam.duration)" [text]="'Start'" [divClasses]="'mt-1'" [classes]="'w-fit pt-1 pb-1 '"></app-button>
     </div>
     }
 
@@ -27,5 +27,5 @@
 
 </div>
 @if (modal) {
-    <app-modal [examId]="selectedExamId"></app-modal>
+    <app-modal [examDuration]="selectedDuration" (modal)="modal = $event" [examId]="selectedExamId"></app-modal>
 }

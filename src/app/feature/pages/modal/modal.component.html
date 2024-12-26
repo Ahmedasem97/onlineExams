@@ -16,8 +16,7 @@
         <div class="section2">
             <div class="flex justify-content-between align-items-center">
                 <span class="question_number">Question {{indexOfArray + 1}} of {{questionArray.length}}</span>
-                <span class="timer flex align-items-center" 
-                [style.color]="minutes < 2 ? '#CE2711' : ''">
+                <span class="timer flex align-items-center" [style.color]="minutes < 2 ? '#CE2711' : ''">
                     <img src="./assets/images/image 2.png" alt="">
                     {{ minutes }}:{{ seconds }}
                 </span>
@@ -33,24 +32,81 @@
                 <ul>
                     @for (li of question.answers; track $index) {
                     <li>
-                        <input type="radio" [id]="li.answer" [name]="question.question">
-                        <label [for]="li.answer">{{li.answer}}</label>
+                        <input type="radio" (click)="getTheKey(li.key, question.correct)"
+                            [id]="li.answer + question.question" [name]="question.question">
+                        <label [for]="li.answer + question.question">{{li.answer}}</label>
                     </li>
                     }
                 </ul>
             </div>
-            
+
             }
         </div>
         <div class="flex gap-6 mt-4">
             <app-button class="btn__back w-full" [text]="'Back'" (click)="backBtn()"></app-button>
-            <app-button class="btn__next w-full" [text]="'Next'" (click)="nextBtn()"></app-button>
+            <app-button class="btn__next w-full" [text]="btnText" (click)="nextBtn()"></app-button>
         </div>
         }
         @if (section3) {
-            <div class="section3">
-                <h1>exam is done</h1>
+        <div class="section3">
+            <p>Your Score</p>
+            <div class="container flex justify-content-evenly gap-4">
+                <div class="percentage flex justify-content-center align-items-center">
+                    <span class="progress-test">{{(correctAnswer / questionArray.length * 100).toFixed()}}%</span>
+                </div>
+                <div class="align-content-center">
+                    <div class="correct__answer mb-1"> <span>Correct</span> <span
+                            class="ml-3 answer__badge">{{correctAnswer}}</span></div>
+                    <div class="incorrect__answer"> <span>Incorrect</span> <span
+                            class="ml-3 answer__badge">{{incorrectAnswer}}</span></div>
+                </div>
             </div>
+            <div class="flex gap-6 mt-4">
+                <app-button class="btn__back w-full" [text]="'Back'" (click)="closeModal()"></app-button>
+                <app-button class="btn__next w-full" [text]="'Show Result'" (click)="showResult()"></app-button>
+            </div>
+        </div>
+        }
+        @if (section4) {
+        <div class="section4 grid">
+            @for (question of wrongAnswer ; track $index) {
+            <div class="wrong_answer col-12 md:col-6">
+                <div class="inner_container">
+                    <p>
+                        {{question.fullQuestion.question}}
+                    </p>
+                    <ul>
+                        @for (answer of question.fullQuestion.answers ; track $index) {
+                        <li [ngClass]="{
+                            'backgroundColor_red':answer.key == question.answer && answer.key !== question.correctAnswer,
+                            'backgroundColor_green': answer.key == question.correctAnswer
+                        }">
+                            <input type="radio" class="disabled" [id]="answer.answer + question.fullQuestion.question"
+                                [name]="question.fullQuestion.question"
+                                [checked]="answer.key == question.answer" >
+                            <label>{{answer.answer}}</label>
+                        </li>
+                        <!-- {
+                            'background':
+                            question.answer !== question.correctAnswer
+                                ? '#CC1010'
+                                : question.answer === answer.key
+                                ? ' #CAF9CC'
+                                : '#EDEFF3',
+                            'borderColor':
+                            question.answer !== question.correctAnswer
+                                ? '#CC1010'
+                                : question.answer === answer.key
+                                ? ' #CAF9CC'
+                                : '#EDEFF3'
+                          } -->
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+            <app-button (click)="closeModal()" class="w-full mt-2" [text]="'Close'"></app-button>
+        </div>
         }
     </div>
 </div>

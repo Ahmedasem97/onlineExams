@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthLipService } from 'auth-lip';
@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ToasterNgService } from '../../../shared/services/toaster-ng.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { ToasterNgService } from '../../../shared/services/toaster-ng.service';
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.scss'
 })
-export class ForgetPasswordComponent {
+export class ForgetPasswordComponent implements OnDestroy{
 
   constructor(
     private _AuthLipService: AuthLipService,
@@ -35,6 +36,11 @@ export class ForgetPasswordComponent {
   step1: boolean = true
   step2: boolean = false
   step3: boolean = false
+
+  forgetApiDestroy!:Subscription
+  verifyCodeApiDestroy!:Subscription
+  ResendCodeApiDestroy!:Subscription
+  setPasswordApiDestroy!:Subscription
 
 
   forgetPasswordForm: FormGroup = new FormGroup({
@@ -165,6 +171,11 @@ export class ForgetPasswordComponent {
     }
   }
 
-
+  ngOnDestroy(): void {
+      this.forgetApiDestroy.unsubscribe()
+      this.ResendCodeApiDestroy.unsubscribe()
+      this.verifyCodeApiDestroy.unsubscribe()
+      this.setPasswordApiDestroy.unsubscribe()
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -7,6 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import { ErrorMessageComponent } from "../error-message/error-message.component";
 import { ApiResponseErrorComponent } from "../api-response-error/api-response-error.component";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { ApiResponseErrorComponent } from "../api-response-error/api-response-er
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy{
 
   constructor(
     private _AuthLipService: AuthLipService,
@@ -33,10 +34,13 @@ export class LoginComponent {
     password: new FormControl(null, [Validators.required])
   })
 
+
+  loginApiDestroy!:Subscription
+
   loginSumbit(): void {
     if (this.loginForm.valid) {
       this.isDisabled = true
-      this._AuthLipService.login(this.loginForm.value).subscribe({
+      this.loginApiDestroy =  this._AuthLipService.login(this.loginForm.value).subscribe({
         next: (res) => {
           localStorage.setItem("token", res.token)
           this._AuthLipService.userToken()
@@ -57,8 +61,10 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched()
     }
 
-
-
   }
 
+
+  ngOnDestroy(): void {
+      this.loginApiDestroy.unsubscribe()
+  }
 }

@@ -56,14 +56,14 @@ export class ExamsLayoutComponent implements OnInit {
       
     }else {
       this._Renderer2.setStyle(el, "top" , "-100%")
-      this._Renderer2.setStyle(el, "padding" , "0")
+      // this._Renderer2.setStyle(el, "padding" , "0")
     }
   }
 
   closeNavbar(el:HTMLDivElement):void {
     this.showNavbar = !this.showNavbar 
     this._Renderer2.setStyle(el, "top" , "-100%")
-    this._Renderer2.setStyle(el, "padding" , "0")
+    // this._Renderer2.setStyle(el, "padding" , "0")
   }
   
   logOut(): void {

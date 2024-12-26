@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import { ExmasService } from '../../services/exmas.service';
 import { ActivatedRoute } from '@angular/router';
 import { AllExamsRes, Exams, ResExams } from '../../interfaces/exams';
 import { ModalComponent } from "../../../feature/pages/modal/modal.component";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-diploma-cards',
@@ -12,7 +13,7 @@ import { ModalComponent } from "../../../feature/pages/modal/modal.component";
   templateUrl: './diploma-cards.component.html',
   styleUrl: './diploma-cards.component.scss'
 })
-export class DiplomaCardsComponent implements OnInit {
+export class DiplomaCardsComponent implements OnInit , OnDestroy{
 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
@@ -23,7 +24,9 @@ export class DiplomaCardsComponent implements OnInit {
   modal: boolean = false
   diplomaRes!: Exams[]
   selectedExamId!: string;
+  selectedDuration!:number;
 
+  diplomaApiDestroy!: Subscription
 
   imageLoaded: boolean = false; // حالة تحميل الصورة
 
@@ -38,7 +41,7 @@ export class DiplomaCardsComponent implements OnInit {
     })
 
     // get api
-    this._ExmasService.getAllExamsOnSubject(this.subjectParamId).subscribe({
+    this.diplomaApiDestroy = this._ExmasService.getAllExamsOnSubject(this.subjectParamId).subscribe({
       next: (res: ResExams) => {
         console.log(res.exams);
 
@@ -48,11 +51,13 @@ export class DiplomaCardsComponent implements OnInit {
     })
   }
 
-  startQuiz(id:string): void {
+  startQuiz(id:string, duration:number): void {
     this.selectedExamId = id
+    this.selectedDuration = duration
     this.modal = true
-    
   }
 
-
+  ngOnDestroy(): void {
+      this.diplomaApiDestroy.unsubscribe()
+  }
 }

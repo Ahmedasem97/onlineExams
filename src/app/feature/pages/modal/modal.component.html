@@ -44,7 +44,7 @@
         </div>
         <div class="flex gap-6 mt-4">
             <app-button class="btn__back w-full" [text]="'Back'" (click)="backBtn()"></app-button>
-            <app-button class="btn__next w-full" [text]="btnText" (click)="nextBtn()"></app-button>
+            <app-button class="btn__next w-full"  [class.disabled]="isDisabled" [text]="btnText" (click)="nextBtn()"></app-button>
         </div>
         }
         @if (section3) {

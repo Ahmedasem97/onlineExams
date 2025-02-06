@@ -78,11 +78,9 @@ export class ModalComponent {
   }
 
   getTheKey(answer:string, correctAnswer:string) {
-    console.log(answer, correctAnswer);
     this.answersArray.splice(this.indexOfArray, 1 , {'answer':answer, 'correctAnswer':correctAnswer , 'fullQuestion': this.questionArray[this.indexOfArray]})
-    console.log(this.answersArray);
 
-    this.isDisabled === false
+    this.isDisabled = false
 
   }
 
@@ -99,6 +97,7 @@ export class ModalComponent {
   nextBtn() {
     if (this.indexOfArray < this.questionArray.length - 1) {
       this.indexOfArray = this.indexOfArray + 1
+      this.isDisabled = true
       this._Renderer2.setStyle(this.balls.get(this.indexOfArray)?.nativeElement,"background-color", "var(--main-color)")
     }else {
       this.section2 = false

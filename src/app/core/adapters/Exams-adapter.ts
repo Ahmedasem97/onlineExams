@@ -20,7 +20,8 @@ export class ExamsAdapter {
       subjects: data.subjects.map((res: AllobjectSubjects) => ({
         _id: res._id,
         name: res.name,
-        icon: res.icon
+        icon: res.icon,
+        
       }))
     }
   }
